@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="margin: 20px;">
+    <h2 style="text-align: center">Detalhes do Planeta</h2>
+  </div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nome:</dt>
+    <dd class="col-sm-9">{{ planeta.nome }}</dd>
+    
+    <dt class="col-sm-3">Porcentagem de Água:</dt>
+    <dd class="col-sm-9">{{ planeta.porcetagem_agua }}</dd>
+    
+    <dt class="col-sm-3">Distância:</dt>
+    <dd class="col-sm-9">{{ planeta.distancia }}</dd>
+    
+    <dt class="col-sm-3">Abriga Vida:</dt>
+    <dd class="col-sm-9">{{ planeta.get_abriga_vida_display }}</dd>
+    
+    <dt class="col-sm-3">Elementos:</dt>
+    <dd class="col-sm-9">
+    {% if planeta.elementos.exists %}
+        <ul>
+        {% for elemento in planeta.elementos.all %}
+            <li>{{ elemento.nome }}</li>
+        {% empty %}
+            <li>Nenhum elemento cadastrado.</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        Nenhum elemento cadastrado.
+    {% endif %}
+    </dd>
+</dl>
+<div style="margin-top: 10px;">
+    <a class="btn btn-warning" href="{% url 'planeta-update' planeta.id %}" role="button">Editar</a>
+    <a class="btn btn-danger" href="{% url 'planeta-delete' planeta.id %}" role="button">Apagar</a>
+    <a class="btn btn-light" href="{% url 'planeta-home' %}" role="button">Voltar</a>
+</div>
+{% endblock %}

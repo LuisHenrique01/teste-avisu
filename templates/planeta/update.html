@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Editar Planeta</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <h2>Editar elemento(s)</h2>
+    <div id="formset-container">
+        {{ elemento|crispy }}
+    </div>
+
+    <div style="margin-top: 10px;">
+      <button id="add-more-btn" type="button" class="btn btn-light">Adicionar mais</button>
+      <button id="submit-btn" type="submit" class="btn btn-primary">Salvar</button>
+    <div>
+  </form>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'addItens.js' %}"></script>
+{% endblock js %}

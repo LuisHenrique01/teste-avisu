@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="margin: 20px;">
+    <h2 style="text-align: center">Listagem de Planetas</h2>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Porcentagem de Água</th>
+          <th scope="col">Distância</th>
+          <th scope="col">Abriga Vida</th>
+          <th scope="col">Elementos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for planeta in planetas %}
+          <tr>
+            <td scope="row">
+              <a href="{% url 'planeta-detail' planeta.id %}" class="table-link {% if planeta.id == planeta_selecionado %}table-active{% endif %}">
+                {{ planeta.nome }}
+              </a>
+            </td>
+            <td scope="row">{{ planeta.porcetagem_agua }}</td>
+            <td scope="row">{{ planeta.distancia }}</td>
+            <td scope="row">{{ planeta.get_abriga_vida_display }}</td>
+            <td scope="row">{{ planeta.elemetos_resumido }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">Nenhum planeta cadastrado.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a class="btn btn-primary" href="{% url 'planeta-create' %}" role="button">Criar planeta</a>
+{% endblock %}

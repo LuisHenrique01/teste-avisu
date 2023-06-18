@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method="post">
+    <h2>Cadastrar novo planeta</h2>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <h2>Cadastrar elemento(s)</h2>
+    <p>Não é obrigatório</p>
+    {{ elemento|crispy }}
+    <div id="formset-container" class="multiField">
+    </div>
+    <div style="margin-top: 10px;">
+        <button id="add-more-btn" type="button" class="btn btn-secondary">Adicionar mais</button>
+        <button id="submit-btn" type="submit" class="btn btn-primary">Salvar</button>
+        <a class="btn btn-light" href="{% url 'planeta-home' %}" role="button">Voltar</a>
+    </div>
+</form>
+
+{% endblock content %}
+{% block js %}
+<script src="{% static 'addItens.js' %}"></script>
+{% endblock js %}
